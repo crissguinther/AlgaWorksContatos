@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="./css/styles.css" rel="stylesheet">
+	<title>AlgaWorks</title>
+</head>
+
+<body>
+	<header>
+		<nav>
+			<ul>
+				<li><a th:href="@{/}">Listar</a></li>
+				<li><a th:href="@{/contatos}">Algaworks Contatos</a></li>
+				<li><a th:href="@{/contatos/novo}">Novo</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<section>
+			<h1>Lista contatos</h1>
+		</section>
+
+		<section>
+			<table>
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Telefone</th>
+						<th>#</th>
+						<th>#</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr> th:each="contato: ${contatos}">
+						<td th:text="${contato.nome}"></td>
+						<td th:text="${contato.telefone}"></td>
+						
+						<td>
+							<a> th:href="@{/contatos/{contato}/editar(contato=${contato.id})}">Editar</a>
+						</td>
+						
+						<td>
+							<form th:action="@{/contatos/{contato}(contato=${contato.id})}"
+								th:method="delete">
+								<button>Remover</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+</body>
+
+</html>

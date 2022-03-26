@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://w3.org/1999/xhtml" xmlns="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./css/styles.css" rel="stylesheet" th:ref="@{/css/styles.css}">
+    <title>Algaworks</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Listar</a></li>
+                <li><a th:href="@{/contatos}">Algaworks Contatos</a></li>
+                <li><a th:href="@{/contatos/novo}">Novo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Seja bem vindo(a)!</h1>
+        </section>
+    </main>
+</body>
+</html>
