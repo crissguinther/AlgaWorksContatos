@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pt_BR">
 
 <head>
 	<meta charset="UTF-8">
@@ -37,18 +37,19 @@
 				</thead>
 
 				<tbody>
-					<tr> th:each="contato: ${contatos}">
+					<tr th:each="contato: ${contatos}">
 						<td th:text="${contato.nome}"></td>
 						<td th:text="${contato.telefone}"></td>
 						
 						<td>
-							<a> th:href="@{/contatos/{contato}/editar(contato=${contato.id})}">Editar</a>
+							<a th:href="@{/contatos/{contato}/editar(contato=${contato.id})}">Editar</a>
 						</td>
 						
 						<td>
 							<form th:action="@{/contatos/{contato}(contato=${contato.id})}"
 								th:method="delete">
 								<button>Remover</button>
+							</form>
 						</td>
 					</tr>
 				</tbody>
