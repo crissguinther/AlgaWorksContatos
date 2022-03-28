@@ -10,13 +10,16 @@ public class Contato {
 		return id;
 	}
 
-	public Contato() {
-	}
+	public Contato() {}
 
 	public Contato(String id, String nome, String telefone) {
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
+	}
+
+	public boolean isNovo() {
+		return id == null;
 	}
 
 	public void setId(String id) {

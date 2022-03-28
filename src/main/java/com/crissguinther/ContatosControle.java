@@ -32,4 +32,12 @@ public class ContatosControle {
 		return modelAndView;
 	}
 
+	@GetMapping("/contatos/novo")
+	public ModelAndView novo() {
+		ModelAndView mav = new ModelAndView("formulario");
+		mav.addObject("contato", new Contato());
+		
+		return mav;
+	}
+
 }
