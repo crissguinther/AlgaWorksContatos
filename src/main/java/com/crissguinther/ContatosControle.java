@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -52,6 +53,16 @@ public class ContatosControle {
 		return mav;
 	}
 
+	@PutMapping("/contatos/{id}")
+	public String atualizar(Contato contato) {
+		int index = procurarIndiceContato(contato.getId());
+
+		LISTA_CONTATOS.remove(index);
+		LISTA_CONTATOS.add(index, contato);
+
+		return "redirect:/contatos";
+	}
+
 	@PostMapping("/contatos")
 	public String cadastrar(Contato contato) {
 		String id = UUID.randomUUID().toString();
@@ -63,15 +74,26 @@ public class ContatosControle {
 		return "redirect:/contatos";
 	}
 
-	public Contato procurarContato(String id) {
-		Contato contato = null;
-		for (Contato c : LISTA_CONTATOS) {
-			if (c.getId().equals(id)) {
-				contato = c;
+	private Contato procurarContato(String id) {
+		Integer indice = procurarIndiceContato(id);
+
+		if (indice != null) {
+			return LISTA_CONTATOS.get(indice);
+		}
+
+		return null;
+	}
+
+	private Integer procurarIndiceContato(String id) {
+		Integer index = null;
+		for (int i = 0; i < LISTA_CONTATOS.size(); i++) {
+			if (LISTA_CONTATOS.get(i).getId().equals(id)) {
+				index = i;
 				break;
 			} else
 				continue;
 		}
-		return contato;
+
+		return index;
 	}
 }
