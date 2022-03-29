@@ -1,9 +1,12 @@
 package com.crissguinther;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,8 +39,39 @@ public class ContatosControle {
 	public ModelAndView novo() {
 		ModelAndView mav = new ModelAndView("formulario");
 		mav.addObject("contato", new Contato());
-		
+
 		return mav;
 	}
 
+	@GetMapping("/contatos/{id}/editar")
+	public ModelAndView editar(@PathVariable String id) {
+		ModelAndView mav = new ModelAndView("formulario");
+
+		mav.addObject(procurarContato(id));
+
+		return mav;
+	}
+
+	@PostMapping("/contatos")
+	public String cadastrar(Contato contato) {
+		String id = UUID.randomUUID().toString();
+
+		contato.setId(id);
+
+		LISTA_CONTATOS.add(contato);
+
+		return "redirect:/contatos";
+	}
+
+	public Contato procurarContato(String id) {
+		Contato contato = null;
+		for (Contato c : LISTA_CONTATOS) {
+			if (c.getId().equals(id)) {
+				contato = c;
+				break;
+			} else
+				continue;
+		}
+		return contato;
+	}
 }
